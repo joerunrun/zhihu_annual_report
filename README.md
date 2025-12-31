@@ -31,3 +31,65 @@
 安装依赖库：
 ```bash
 pip install pandas playwright requests plotly wordcloud jieba
+```
+
+安装浏览器内核：
+```bash
+playwright install chromium
+```
+
+### 2. 运行步骤
+
+1. **登录知乎**
+运行后会弹出浏览器，请在手机端扫码登录，登录成功后会自动保存 cookies.json
+
+```bash 
+python crawler.py login
+```
+
+2. **爬取数据**
+自动滚动抓取动态，直到遇到 2025 年之前的数据停止。
+
+```bash 
+python crawler.py 
+```
+
+3. **数据清洗**
+将原始 JSON 转换为 CSV。
+
+```bash 
+python data_processor.py
+```
+
+
+4. **AI分析**
+调用 LLM 对数据进行分类和关键词提取（需要消耗少量 Token）。
+
+```bash 
+python api_analyse.py
+```
+
+5. **生成报告**
+在当前目录下生成 annual_report.html，直接用浏览器打开即可查看。
+
+```bash 
+python annual_report.py
+```
+
+## 💡 心路历程 (Dev Journey)
+这个项目的诞生经历了一次有趣的“AI 驱动开发”转型。
+
+起初，我制定了一份 claude.md 路线图，原本计划完全依赖 Claude 的 Web 界面来指导我写代码，按部就班地从爬虫写到分析。
+
+后来，在实际编码过程中，我切换到了更习惯的 GitHub Copilot (配合 VS Code)。
+
+最终生成的 annual_report.html 前端代码，几乎完全是由 GPT-5.2 和 Gemini 3 Pro 生成的。但是整体方向依然需要我来把控，比如是我提出要尽量多利用llm来分析提取关键词，当然现在也保留了结巴分词的关键词。
+
+更重要的是，我意识到了数据的重要性，最终呈现出来比较好的分析效果也是由于我点赞了大量优质的知乎回答内容，这样分析才有着力点。要特别感谢优质内容的贡献者。
+
+更更重要的是，我还意识到了自己刷了太多时间的知乎，明年应该控制一下。
+
+
+## 最终效果图
+![词云](display.png)
+![统计](image.png)
