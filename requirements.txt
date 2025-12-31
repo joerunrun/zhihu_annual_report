@@ -1,0 +1,9 @@
+playwright
+playwright-stealth
+pandas
+anthropic
+python-dotenv
+plotly
+matplotlib
+wordcloud
+jieba
